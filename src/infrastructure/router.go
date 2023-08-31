@@ -13,8 +13,8 @@ func Init() {
 	userController := controllers.NewUserController(NewSqlHandler())
 	segmentController := controllers.NewSegmentController(NewSqlHandler())
 
-	e.GET("/user_segments", func(ctx echo.Context) error {
-		segments, err := userController.GetUserSegmentsById(ctx.QueryParam("id"))
+	e.GET("/user_segments/:id", func(ctx echo.Context) error {
+		segments, err := userController.GetUserSegmentsById(ctx.Param("id"))
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, "unable to get user segments")
 		}
