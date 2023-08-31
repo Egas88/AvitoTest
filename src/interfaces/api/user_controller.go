@@ -22,7 +22,7 @@ func NewUserController(sqlHandler database.SqlHandler) *UserController {
 }
 
 func (controller *UserController) Create(c echo.Context) {
-	u := domain.User{Name: c.QueryParam("Name")}
+	u := domain.User{Name: c.Param("Name")}
 	c.Bind(&u)
 	controller.Interactor.Add(u)
 	createdUsers := controller.Interactor.GetInfo()
